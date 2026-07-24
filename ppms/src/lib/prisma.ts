@@ -2,7 +2,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
-const databaseUrl = process.env.DATABASE_URL;
+const databaseUrl = process.env.DIRECT_DATABASE_URL || process.env.DATABASE_URL;
 
 function isPlaceholderDatabase(url: string | undefined) {
   return !url || url.includes("johndoe") || url.includes("localhost:5432/mydb");

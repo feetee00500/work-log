@@ -1,7 +1,9 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
+
+dotenv.config({ path: ".env.local" });
 
 function requiredEnvironment(name: string): string {
   const value = process.env[name];
@@ -10,7 +12,7 @@ function requiredEnvironment(name: string): string {
 }
 
 async function main() {
-  const databaseUrl = requiredEnvironment("DATABASE_URL");
+  const databaseUrl = process.env.DIRECT_DATABASE_URL || requiredEnvironment("DATABASE_URL");
   const name = requiredEnvironment("ADMIN_NAME");
   const email = requiredEnvironment("ADMIN_EMAIL");
   const password = process.env.ADMIN_PASSWORD || "P@ssw0rdP@ssw0rd123";
