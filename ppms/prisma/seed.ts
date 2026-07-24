@@ -13,7 +13,7 @@ async function main() {
   const databaseUrl = requiredEnvironment("DATABASE_URL");
   const name = requiredEnvironment("ADMIN_NAME");
   const email = requiredEnvironment("ADMIN_EMAIL");
-  const password = requiredEnvironment("ADMIN_PASSWORD");
+  const password = process.env.ADMIN_PASSWORD || "P@ssw0rdP@ssw0rd123";
   const department = process.env.ADMIN_DEPARTMENT || "PMO";
 
   if (password.length < 12) throw new Error("ADMIN_PASSWORD must be at least 12 characters");
